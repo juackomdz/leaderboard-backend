@@ -2,12 +2,32 @@ package cl.leaderboard.leaderboard_backend.model;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "tablero")
 public class TableroModel {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @OneToOne
+    @JoinColumn(name = "usuarioid")
     private UsuarioModel usuarioId;
+    @OneToOne
+    @JoinColumn(name = "partidaid")
     private PartidaModel partidaId;
+    @OneToOne
+    @JoinColumn(name = "puntajeid")
     private PuntajeModel puntajeId;
+    @Column(name = "fechacreacion")
     private Date fechaCreacion;
     
     public TableroModel() {

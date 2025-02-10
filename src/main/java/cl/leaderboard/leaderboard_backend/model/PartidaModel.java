@@ -21,7 +21,7 @@ public class PartidaModel {
     private String nombrePartida;
     @Column(name = "descripcion")
     private String descripcion;
-    @Column(name = "fechaCreacion")
+    @Column(name = "fechacreacion")
     private Date fechaCreacion;
     
     public PartidaModel() {

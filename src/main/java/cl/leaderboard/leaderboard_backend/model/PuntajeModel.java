@@ -1,19 +1,41 @@
 package cl.leaderboard.leaderboard_backend.model;
 
 import java.util.Date;
+import java.util.List;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "puntaje")
 public class PuntajeModel {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "puntos")
     private int puntos;
-    private UsuarioModel usuarioId;
+    @ManyToOne
+    @JoinColumn(name = "idusuario")
+    private UsuarioModel[] usuarioId;
+    @OneToOne
+    @JoinColumn(name = "idpartida")
     private PartidaModel partidaId;
+    @Column(name = "fechacreacion")
     private Date fechaCreacion;
     
     public PuntajeModel() {
     }
 
-    public PuntajeModel(int id, int puntos, UsuarioModel usuarioId, PartidaModel partidaId, Date fechaCreacion) {
+    public PuntajeModel(int id, int puntos, UsuarioModel[] usuarioId, PartidaModel partidaId, Date fechaCreacion) {
         this.id = id;
         this.puntos = puntos;
         this.usuarioId = usuarioId;
@@ -37,11 +59,11 @@ public class PuntajeModel {
         this.puntos = puntos;
     }
 
-    public UsuarioModel getUsuarioId() {
+    public UsuarioModel[] getUsuarioId() {
         return usuarioId;
     }
 
-    public void setUsuarioId(UsuarioModel usuarioId) {
+    public void setUsuarioId(UsuarioModel[] usuarioId) {
         this.usuarioId = usuarioId;
     }
 
@@ -61,5 +83,6 @@ public class PuntajeModel {
         this.fechaCreacion = fechaCreacion;
     }
 
+    
     
 }
