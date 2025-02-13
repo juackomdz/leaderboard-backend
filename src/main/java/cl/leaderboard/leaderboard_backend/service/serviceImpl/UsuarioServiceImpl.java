@@ -2,6 +2,7 @@ package cl.leaderboard.leaderboard_backend.service.serviceImpl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,5 +33,13 @@ public class UsuarioServiceImpl implements UsuarioService{
         userResponse.setFechaCreacion(new Date());
         userResponse.setFechaModificacion(null);
         return this.usuarioRepository.save(userResponse);
+    }
+
+    public UsuarioModel buscarUsuario(Integer id){
+        Optional<UsuarioModel> opt = this.usuarioRepository.findById(id);
+        if (opt.isPresent()) {
+            return opt.get();
+        }
+        return null;
     }
 }

@@ -9,9 +9,12 @@ import cl.leaderboard.leaderboard_backend.DTOs.CrearUsuarioDTO;
 import cl.leaderboard.leaderboard_backend.model.UsuarioModel;
 import cl.leaderboard.leaderboard_backend.service.UsuarioService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -30,6 +33,11 @@ public class UsuarioController {
     @PostMapping("")
     public UsuarioModel registrar_usuario(@RequestBody CrearUsuarioDTO entity) {
         return this.usuarioService.guardarUsuario(entity);
+    }
+    
+    @GetMapping("/{id}")
+    public UsuarioModel buscar_usuario_id(@PathVariable Integer id) {
+        return this.usuarioService.buscarUsuario(id);
     }
     
 }

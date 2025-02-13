@@ -12,4 +12,5 @@ public interface UsuarioService{
 
     List<UsuarioModel> listarUsuarios();
     UsuarioModel guardarUsuario(CrearUsuarioDTO usuario);
+    UsuarioModel buscarUsuario(Integer id);
 }
