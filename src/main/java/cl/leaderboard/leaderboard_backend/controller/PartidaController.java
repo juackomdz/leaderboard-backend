@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import cl.leaderboard.leaderboard_backend.DTOs.PartidasDTO;
+import cl.leaderboard.leaderboard_backend.DTOs.CrearPartidaDTO;
 import cl.leaderboard.leaderboard_backend.model.PartidaModel;
 import cl.leaderboard.leaderboard_backend.service.PartidaService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @RestController
@@ -20,8 +23,13 @@ public class PartidaController {
     private PartidaService partidaService;
 
     @GetMapping("")
-    public List<PartidasDTO> listar_partidas() {
-        return this.partidaService.listarPartidasJugadas();
+    public List<PartidaModel> listar_partidas() {
+        return this.partidaService.listarPartidas();
+    }
+    
+    @PostMapping("")
+    public PartidaModel agregar_partida(@RequestBody CrearPartidaDTO entity) {
+        return this.partidaService.agregarPartida(entity);
     }
     
 }

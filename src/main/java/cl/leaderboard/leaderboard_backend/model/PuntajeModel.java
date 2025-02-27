@@ -9,7 +9,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -23,9 +22,9 @@ public class PuntajeModel {
     private int id;
     @Column(name = "puntos")
     private int puntos;
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "idusuario")
-    private UsuarioModel[] usuarioId;
+    private List<UsuarioModel> usuarioId;
     @OneToOne
     @JoinColumn(name = "idpartida")
     private PartidaModel partidaId;
@@ -35,7 +34,7 @@ public class PuntajeModel {
     public PuntajeModel() {
     }
 
-    public PuntajeModel(int id, int puntos, UsuarioModel[] usuarioId, PartidaModel partidaId, Date fechaCreacion) {
+    public PuntajeModel(int id, int puntos, List<UsuarioModel> usuarioId, PartidaModel partidaId, Date fechaCreacion) {
         this.id = id;
         this.puntos = puntos;
         this.usuarioId = usuarioId;
@@ -59,11 +58,11 @@ public class PuntajeModel {
         this.puntos = puntos;
     }
 
-    public UsuarioModel[] getUsuarioId() {
+    public List<UsuarioModel> getUsuarioId() {
         return usuarioId;
     }
 
-    public void setUsuarioId(UsuarioModel[] usuarioId) {
+    public void setUsuarioId(List<UsuarioModel> usuarioId) {
         this.usuarioId = usuarioId;
     }
 

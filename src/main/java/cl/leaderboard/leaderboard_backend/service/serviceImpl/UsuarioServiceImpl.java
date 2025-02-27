@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cl.leaderboard.leaderboard_backend.DTOs.ActualizarUsuarioDTO;
 import cl.leaderboard.leaderboard_backend.DTOs.CrearUsuarioDTO;
 import cl.leaderboard.leaderboard_backend.model.UsuarioModel;
 import cl.leaderboard.leaderboard_backend.repository.IUsuarioRepository;
@@ -39,6 +40,20 @@ public class UsuarioServiceImpl implements UsuarioService{
         Optional<UsuarioModel> opt = this.usuarioRepository.findById(id);
         if (opt.isPresent()) {
             return opt.get();
+        }
+        return null;
+    }
+
+    public UsuarioModel actualizarUsuario(Integer id, ActualizarUsuarioDTO usuario){
+        UsuarioModel user = new UsuarioModel();
+       
+        Optional<UsuarioModel> opt = this.usuarioRepository.findById(id);
+        if (opt.isPresent()) {
+            user.setUsername(opt.get().getUsername());
+            user.setEmail(opt.get().getEmail());
+            user.setPass(opt.get().getPass());
+            user.setFechaModificacion(new Date());
+            return this.usuarioRepository.save(user);
         }
         return null;
     }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
+import cl.leaderboard.leaderboard_backend.DTOs.ActualizarUsuarioDTO;
 import cl.leaderboard.leaderboard_backend.DTOs.CrearUsuarioDTO;
 import cl.leaderboard.leaderboard_backend.model.UsuarioModel;
 import cl.leaderboard.leaderboard_backend.service.UsuarioService;
@@ -13,7 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 
@@ -40,4 +42,8 @@ public class UsuarioController {
         return this.usuarioService.buscarUsuario(id);
     }
     
+    @PutMapping("/{id}")
+    public UsuarioModel actualizar_usuario(@PathVariable Integer id, @RequestBody ActualizarUsuarioDTO entity) {
+        return this.usuarioService.actualizarUsuario(id, entity);
+    }
 }
