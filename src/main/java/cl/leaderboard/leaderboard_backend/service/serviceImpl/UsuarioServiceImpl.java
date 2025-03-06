@@ -45,15 +45,14 @@ public class UsuarioServiceImpl implements UsuarioService{
     }
 
     public UsuarioModel actualizarUsuario(Integer id, ActualizarUsuarioDTO usuario){
-        UsuarioModel user = new UsuarioModel();
        
         Optional<UsuarioModel> opt = this.usuarioRepository.findById(id);
         if (opt.isPresent()) {
-            user.setUsername(opt.get().getUsername());
-            user.setEmail(opt.get().getEmail());
-            user.setPass(opt.get().getPass());
-            user.setFechaModificacion(new Date());
-            return this.usuarioRepository.save(user);
+            opt.get().setUsername(usuario.getUsername());
+            opt.get().setEmail(usuario.getEmail());
+            opt.get().setPass(usuario.getPass());
+            opt.get().setFechaModificacion(new Date());
+            return this.usuarioRepository.save(opt.get());
         }
         return null;
     }
