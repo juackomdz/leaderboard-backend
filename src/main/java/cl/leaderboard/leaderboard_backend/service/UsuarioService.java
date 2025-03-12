@@ -15,4 +15,5 @@ public interface UsuarioService{
     UsuarioModel guardarUsuario(CrearUsuarioDTO usuario);
     UsuarioModel buscarUsuario(Integer id);
     UsuarioModel actualizarUsuario(Integer id, ActualizarUsuarioDTO usuario);
+    boolean borrarUsuario(Integer id);
 }

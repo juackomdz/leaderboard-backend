@@ -5,23 +5,31 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import cl.leaderboard.leaderboard_backend.DTOs.ActualizarUsuarioDTO;
 import cl.leaderboard.leaderboard_backend.DTOs.CrearUsuarioDTO;
 import cl.leaderboard.leaderboard_backend.model.UsuarioModel;
+import cl.leaderboard.leaderboard_backend.repository.IPartidaRepository;
 import cl.leaderboard.leaderboard_backend.repository.IUsuarioRepository;
 import cl.leaderboard.leaderboard_backend.service.UsuarioService;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService{
 
+    private final IPartidaRepository IPartidaRepository;
+
     @Autowired
     private IUsuarioRepository usuarioRepository;
 
+    UsuarioServiceImpl(IPartidaRepository IPartidaRepository) {
+        this.IPartidaRepository = IPartidaRepository;
+    }
+
     public List<UsuarioModel> listarUsuarios(){
         // código para listar usuarios
-        return this.usuarioRepository.findAll();
+        return this.usuarioRepository.findAll(Sort.by("id").ascending());
     }
 
     public UsuarioModel guardarUsuario(CrearUsuarioDTO usuario){
@@ -55,5 +63,14 @@ public class UsuarioServiceImpl implements UsuarioService{
             return this.usuarioRepository.save(opt.get());
         }
         return null;
+    }
+
+    public boolean borrarUsuario(Integer id){
+        if (this.buscarUsuario(id)!=null) {
+            this.usuarioRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
